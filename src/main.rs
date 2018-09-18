@@ -3,14 +3,13 @@ extern crate serde_derive;
 extern crate serde;
 extern crate serde_json;
 
-use std::path::Path;
-use std::fs::File;
-use std::io;
-use std::io::Read;
-use std::io::BufReader;
 use std::collections::HashMap;
 use std::collections::VecDeque;
-
+use std::fs::File;
+use std::io;
+use std::io::BufReader;
+use std::io::Read;
+use std::path::Path;
 
 fn main() {
     let stops = load_stops();
@@ -18,7 +17,9 @@ fn main() {
     let mut queue = VecDeque::new();
     println!("From:");
     let mut from = String::new();
-    io::stdin().read_line(&mut from).expect("Failed to read line");
+    io::stdin()
+        .read_line(&mut from)
+        .expect("Failed to read line");
     println!("To:");
     let mut to = String::new();
     io::stdin().read_line(&mut to).expect("Failed to read line");
@@ -42,7 +43,12 @@ fn main() {
     }
 }
 
-fn trace_back_and_print(destination: String, parent: String, visited: HashMap<String, String>, stops: HashMap<String, Stop>) {
+fn trace_back_and_print(
+    destination: String,
+    parent: String,
+    visited: HashMap<String, String>,
+    stops: HashMap<String, Stop>,
+) {
     let stop = stops.get(&destination).unwrap();
     let mut parent = stops.get(&parent).unwrap();
     let mut route = String::new();
@@ -70,7 +76,7 @@ fn load_stops() -> HashMap<String, Stop> {
     let mut stop_map = HashMap::new();
     for stop in stops {
         stop_map.insert(stop.code.clone(), stop);
-    };
+    }
     stop_map
 }
 
