@@ -65,7 +65,7 @@ fn trace_back_and_print(
 }
 
 fn load_stops() -> HashMap<String, Stop> {
-    let file_path = Path::new("./resource/network.json");
+    let file_path = Path::new("./resource/graph.json");
     let file = File::open(file_path).unwrap();
 
     let mut data = String::new();
